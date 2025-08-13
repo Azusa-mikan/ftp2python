@@ -89,7 +89,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='ftp2python',
+    name='ftp2python-upx',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
