@@ -61,9 +61,8 @@ def main() -> None:
     )
     parser.add_argument(
         "-l", "--language",
-        choices=["zh_CN", "en_US"],
         default="zh_CN",
-        help="界面语言（默认：zh_CN）"
+        help="界面语言（支持：zh_CN, en_US, zh, en, chinese, english 等，默认：zh_CN）"
     )
     
     args = parser.parse_args()
