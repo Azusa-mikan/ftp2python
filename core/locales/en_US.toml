@@ -1,0 +1,70 @@
+# English translation file
+
+[server]
+starting = "FTP server is starting..."
+started = "FTP server started successfully"
+stopping = "Stopping FTP server..."
+stopped = "FTP server stopped"
+running = "FTP server is running, press Ctrl+C to stop..."
+startup_failed = "Server startup failed"
+already_running = "Server is already running"
+not_running = "Server is not running"
+
+[config]
+loading = "Loading configuration file"
+loaded = "Configuration file loaded successfully"
+created = "Default configuration file created: {path}"
+error = "Configuration file error: {error}"
+validation_failed = "Configuration validation failed"
+file_not_found = "Configuration file not found"
+parse_error = "Configuration file parse error {file}: {error}"
+
+[user]
+config_error = "User configuration error"
+validation_failed = "User configuration validation failed"
+auth_success = "User authentication successful"
+auth_failed = "User authentication failed"
+list_empty = "User list is empty"
+invalid_format = "Invalid user configuration format"
+must_provide_username_password = "Each user in users must provide username and password"
+added = "User added: {username}, home directory: {home_path}"
+config_must_be_array = "Configuration item users must be an array ([[users]])"
+config_must_have_at_least_one = "Configuration file must have at least one user ([[users]])"
+config_must_be_dict = "User configuration {index} must be in dictionary format"
+config_missing_username = "User configuration {index} missing username"
+config_missing_password = "User configuration {index} missing password"
+config_duplicate_username = "Username '{username}' is duplicated"
+config_invalid_permission = "User '{username}' has invalid permission configuration: {perm}"
+
+[network]
+listening_on = "Listening on {host}:{port}"
+shared_directory = "Shared directory: {shared_dir}"
+config_file = "Configuration file: {config_file}"
+account_list = "Account list:"
+server_ip = "Server IP"
+passive_ports = "Passive port range: {start}-{end}"
+banner_message = "Banner message: {banner}"
+max_connections = "Maximum connections: {max_cons}"
+max_connections_per_ip = "Maximum connections per IP: {max_cons_per_ip}"
+
+[error]
+port_invalid = "Invalid port: {port}"
+listen_address_invalid = "Invalid listen address: {address}"
+max_cons_invalid = "Invalid max connections: {max_cons}"
+max_cons_per_ip_invalid = "Invalid max connections per IP: {max_cons_per_ip}"
+passive_ports_invalid = "Invalid passive ports: {passive_ports}"
+passive_ports_format_invalid = "Invalid passive ports format: {passive_ports}"
+passive_ports_range_invalid = "Invalid passive ports range: {start}-{end}"
+file_operation_failed = "File operation failed: {error}"
+permission_denied = "Permission denied: {path}"
+network_error = "Network error: {error}"
+user_must_provide_username_password = "Username and password must be provided"
+user_added = "User added: {username} -> {home_path}"
+
+[tip]
+lan_access = "Tip: You can connect from LAN using FTP client, e.g."
+keyboard_interrupt = "Received keyboard interrupt signal, exiting..."
+runtime_error = "Runtime error occurred in server"
+
+[ui]
+separator = "========================================"
