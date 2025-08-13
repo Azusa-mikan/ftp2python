@@ -6,65 +6,167 @@ started = "FTP 服务器启动成功"
 stopping = "正在停止 FTP 服务器..."
 stopped = "FTP 服务器已停止"
 running = "FTP 服务器正在运行，按 Ctrl+C 停止..."
-startup_failed = "服务器启动失败"
-already_running = "服务器已在运行"
-not_running = "服务器未运行"
+
+[user]
+must_provide_username_password = "users 中每个用户必须提供 username 与 password"
+config_must_be_array = "配置项 users 必须为数组（[[users]]）"
+config_must_have_at_least_one = "配置文件中必须至少配置一个用户（[[users]]）"
+config_must_be_list = "用户配置必须是列表格式"
+account_info = "  用户: {username}  密码: {password}  主目录: {home}"
+added = "用户 {username} 添加成功，主目录：{home_path}"
+[network]
+passive_ports = "被动端口范围：{start}-{end}"
+banner_message = "已设置横幅消息：{banner}"
+max_connections = "已设置最大连接数：{max_cons}"
+max_connections_per_ip = "已设置每IP最大连接数：{max_cons_per_ip}"
+listening_on = "监听地址 {host}:{port}"
+shared_directory = "共享目录：{shared_dir}"
+config_file = "使用的配置文件：{config_file}"
+account_list = "已配置的用户账号："
+
+[error]
+file_read = "读取文件失败 {file}: {error}"
+file_write = "写入文件失败 {file}: {error}"
+listen_invalid = "无效的监听地址: {listen}"
+max_cons_invalid = "无效的最大连接数: {max_cons}"
+max_cons_per_ip_invalid = "无效的每IP最大连接数: {max_cons_per_ip}"
+port_invalid = "无效的端口号: {port}"
 
 [config]
 loading = "正在加载配置文件"
 loaded = "配置文件加载成功"
 created = "已创建默认配置文件：{path}"
-error = "配置文件错误：{error}"
-validation_failed = "配置验证失败"
-file_not_found = "配置文件不存在"
-parse_error = "配置文件格式错误 {file}：{error}"
+creating_default = "正在创建默认配置文件：{path}"
+saved = "配置文件保存成功：{path}"
+saved_successfully = "配置保存成功"
+save_failed = "保存配置失败: {error}"
+encoding_error = "配置文件编码错误: {error}"
+invalid_format = "配置文件格式无效: {file}"
+parse_error = "配置文件解析错误: {error}"
 
-[user]
-config_error = "用户配置错误"
-validation_failed = "用户配置验证失败"
-auth_success = "用户认证成功"
-auth_failed = "用户认证失败"
-list_empty = "用户列表为空"
-invalid_format = "用户配置格式无效"
-must_provide_username_password = "users 中每个用户必须提供 username 与 password"
-added = "已添加用户：{username}，主目录：{home_path}"
-config_must_be_array = "配置项 users 必须为数组（[[users]]）"
-config_must_have_at_least_one = "配置文件中必须至少配置一个用户（[[users]]）"
-config_must_be_dict = "用户配置 {index} 必须是字典格式"
-config_missing_username = "用户配置 {index} 缺少用户名"
-config_missing_password = "用户配置 {index} 缺少密码"
-config_duplicate_username = "用户名 '{username}' 重复"
-config_invalid_permission = "用户 '{username}' 的权限配置无效：{perm}"
+[passive_ports]
+format_invalid = "无效的被动端口格式: {passive_ports}"
+range_invalid = "无效的被动端口范围: 起始={start}, 结束={end}"
 
-[network]
-listening_on = "监听地址：{host}:{port}"
-shared_directory = "共享目录：{shared_dir}"
-config_file = "配置文件：{config_file}"
-account_list = "账户列表："
-server_ip = "服务器IP"
-passive_ports = "被动端口范围：{start}-{end}"
-banner_message = "横幅消息：{banner}"
-max_connections = "最大连接数：{max_cons}"
-max_connections_per_ip = "每个IP最大连接数：{max_cons_per_ip}"
+[user_config]
+duplicate_username = "配置中用户名重复: {username}"
+field_empty = "用户 #{index} 字段 '{field}' 不能为空"
+invalid_permission = "用户 {username} 权限无效: {perm}"
+missing_field = "用户 #{index} 缺少必需字段: {field}"
+missing_password = "用户 #{index} 缺少密码"
+missing_username = "用户 #{index} 缺少用户名"
+must_be_dict = "用户 #{index} 配置必须是字典格式"
 
-[error]
-port_invalid = "端口无效：{port}"
-listen_address_invalid = "监听地址无效：{address}"
-max_cons_invalid = "最大连接数无效：{max_cons}"
-max_cons_per_ip_invalid = "每个IP最大连接数无效：{max_cons_per_ip}"
-passive_ports_invalid = "被动端口无效：{passive_ports}"
-passive_ports_format_invalid = "被动端口格式无效：{passive_ports}"
-passive_ports_range_invalid = "被动端口范围无效：{start}-{end}"
-file_operation_failed = "文件操作失败：{error}"
-permission_denied = "权限被拒绝：{path}"
-network_error = "网络错误：{error}"
-user_must_provide_username_password = "必须提供用户名和密码"
-user_added = "用户已添加：{username} -> {home_path}"
 
 [tip]
 lan_access = "提示：同一局域网内可用 ftp 客户端连接，例如"
 keyboard_interrupt = "收到键盘中断信号，正在退出..."
-runtime_error = "服务器运行时发生错误"
+runtime_error = "运行时错误: {error}"
 
 [ui]
 separator = "========================================"
+
+[gui]
+# 窗口标题
+window_title = "FTP2Python 服务器管理器"
+
+# 选项卡标题
+tab_server_control = "服务器控制"
+tab_server_config = "服务器配置"
+tab_user_management = "用户管理"
+tab_log = "日志"
+
+# 服务器控制选项卡
+server_status = "服务器状态"
+server_info = "服务器信息"
+connection_info = "连接信息"
+server_not_running = "服务器未运行"
+server_running = "服务器正在运行"
+listen_address = "监听地址:"
+port = "端口:"
+shared_directory = "共享目录:"
+browse = "浏览"
+
+# 服务器配置选项卡
+config_file = "配置文件"
+config_file_path = "配置文件路径:"
+reload = "重新加载"
+basic_settings = "基本设置"
+max_connections = "最大连接数:"
+max_connections_per_ip = "每IP最大连接数:"
+welcome_message = "欢迎消息:"
+passive_port_settings = "被动端口设置"
+enable_passive_ports = "启用被动端口范围"
+start_port = "起始端口:"
+end_port = "结束端口:"
+
+
+# 用户管理选项卡
+user_list = "用户列表"
+username = "用户名"
+password = "密码"
+permissions = "权限"
+home_directory = "主目录"
+add_user = "添加用户"
+edit_user = "编辑用户"
+delete_user = "删除用户"
+
+# 日志选项卡
+clear_logs = "清空日志"
+save_logs = "保存日志"
+
+# 控制按钮
+start_server = "启动服务器"
+stop_server = "停止服务器"
+
+# 错误和状态消息
+import_error = "错误：无法导入GUI模块"
+dependency_error = "请确保安装了tkinter和其他GUI依赖"
+switching_to_cli = "正在切换到命令行模式..."
+startup_failed = "GUI启动失败: {error}"
+exit = "退出"
+
+# 用户对话框
+user_permissions_hint = "(e:进入 l:列出 r:读取 a:追加 d:删除 f:重命名 m:创建目录 w:写入)"
+home_directory_hint = "(留空则使用共享目录)"
+ok = "确定"
+cancel = "取消"
+
+# 消息和提示
+warning = "警告"
+confirm = "确认"
+error = "错误"
+success = "成功"
+select_user_to_edit = "请先选择要编辑的用户"
+select_user_to_delete = "请先选择要删除的用户"
+confirm_delete_user = "确定要删除选中的用户吗？"
+server_already_running = "服务器已在运行"
+server_is_running_exit = "服务器正在运行，确定要退出吗？"
+log_saved_success = "日志保存成功"
+log_save_failed = "保存日志失败: {error}"
+username_cannot_be_empty = "用户名不能为空"
+password_cannot_be_empty = "密码不能为空"
+invalid_permission_string = "权限字符串无效，只能包含: e l r a d f m w"
+start_gui_failed = "启动GUI失败"
+
+ftp_server_stopped = "FTP服务器已停止"
+start_server_failed = "启动服务器失败"
+stop_server_failed = "停止服务器失败"
+user_added = "用户已添加: {username}"
+user_deleted = "用户已删除: {username}"
+user_updated = "用户已更新: {username}"
+# 连接信息
+connection_info_title = "FTP服务器连接信息："
+connection_methods = "客户端连接方式："
+ftp_client_method = "1. 使用FTP客户端软件（如FileZilla）"
+ftp_client_host = "   - 主机: {host}"
+ftp_client_port = "   - 端口: {port}"
+ftp_client_credentials = "   - 用户名和密码: 见用户管理选项卡"
+command_line_method = "2. 命令行连接："
+command_line_example = "   ftp {host} {port}"
+browser_method = "3. 浏览器访问（仅支持下载）："
+browser_example = "   ftp://用户名:密码@{host}:{port}/"
+
+[i18n]
+locale_load_failed = "Warning: Failed to load locale file {locale_file}: {error}"
+locale_not_found = "Warning: Locale file {locale_file} not found"

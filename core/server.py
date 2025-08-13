@@ -31,36 +31,36 @@ def apply_handler_options(handler, config: Dict[str, Any]) -> None:
             elif isinstance(passive_ports, list) and len(passive_ports) == 2:
                 start, end = int(passive_ports[0]), int(passive_ports[1])
             else:
-                raise ValueError(_("passive_ports_format_invalid", passive_ports=passive_ports))
+                raise ValueError(_("passive_ports.format_invalid", passive_ports=passive_ports))
             
             if start > end or start < 1024 or end > 65535:
-                raise ValueError(_("passive_ports_range_invalid", start=start, end=end))
+                raise ValueError(_("passive_ports.range_invalid", start=start, end=end))
                 
             handler.passive_ports = range(start, end + 1)
-            logger.info("network_passive_ports", start=start, end=end)
+            logger.info("network.passive_ports", start=start, end=end)
         except (ValueError, TypeError) as e:
-            logger.error("passive_ports_format_invalid", passive_ports=passive_ports)
+            logger.error("passive_ports.format_invalid", passive_ports=passive_ports)
     
     # 横幅消息
     banner = config.get("banner")
     if banner:
         handler.banner = str(banner)
-        logger.info("network_banner_message", banner=banner)
+        logger.info("network.banner_message", banner=banner)
     
     # 最大连接数
     max_cons = config.get("max_cons")
     if max_cons:
         try:
             handler.max_cons = int(max_cons)
-            logger.info("network_max_connections", max_cons=max_cons)
+            logger.info("network.max_connections", max_cons=max_cons)
         except (ValueError, TypeError):
-            logger.error("max_cons_invalid", max_cons=max_cons)
+            logger.error("error.max_cons_invalid", max_cons=max_cons)
     
     # 每个IP最大连接数
     max_cons_per_ip = config.get("max_cons_per_ip")
     if max_cons_per_ip:
         try:
             handler.max_cons_per_ip = int(max_cons_per_ip)
-            logger.info("network_max_connections_per_ip", max_cons_per_ip=max_cons_per_ip)
+            logger.info("network.max_connections_per_ip", max_cons_per_ip=max_cons_per_ip)
         except (ValueError, TypeError):
-            logger.error("max_cons_per_ip_invalid", max_cons_per_ip=max_cons_per_ip)
+            logger.error("error.max_cons_per_ip_invalid", max_cons_per_ip=max_cons_per_ip)

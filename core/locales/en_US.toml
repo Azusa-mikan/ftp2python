@@ -6,65 +6,167 @@ started = "FTP server started successfully"
 stopping = "Stopping FTP server..."
 stopped = "FTP server stopped"
 running = "FTP server is running, press Ctrl+C to stop..."
-startup_failed = "Server startup failed"
-already_running = "Server is already running"
-not_running = "Server is not running"
+
+[user]
+must_provide_username_password = "Each user in users must provide username and password"
+config_must_be_array = "Configuration item users must be an array ([[users]])"
+config_must_have_at_least_one = "Configuration file must have at least one user ([[users]])"
+config_must_be_list = "User configuration must be a list format"
+account_info = "  User: {username}  Password: {password}  Home: {home}"
+added = "User {username} added successfully, home directory: {home_path}"
+
+[network]
+passive_ports = "Passive ports configured: {start}-{end}"
+banner_message = "Banner message set: {banner}"
+max_connections = "Max connections set: {max_cons}"
+max_connections_per_ip = "Max connections per IP set: {max_cons_per_ip}"
+listening_on = "Listening on {host}:{port}"
+shared_directory = "Shared directory: {shared_dir}"
+config_file = "Using config file: {config_file}"
+account_list = "Configured user accounts:"
+
+[error]
+file_read = "Failed to read file {file}: {error}"
+file_write = "Failed to write file {file}: {error}"
+listen_invalid = "Invalid listen address: {listen}"
+max_cons_invalid = "Invalid max connections: {max_cons}"
+max_cons_per_ip_invalid = "Invalid max connections per IP: {max_cons_per_ip}"
+port_invalid = "Invalid port number: {port}"
 
 [config]
 loading = "Loading configuration file"
 loaded = "Configuration file loaded successfully"
 created = "Default configuration file created: {path}"
-error = "Configuration file error: {error}"
-validation_failed = "Configuration validation failed"
-file_not_found = "Configuration file not found"
-parse_error = "Configuration file parse error {file}: {error}"
+creating_default = "Creating default configuration file: {path}"
+saved = "Configuration file saved successfully: {path}"
+saved_successfully = "Configuration saved successfully"
+save_failed = "Failed to save configuration: {error}"
+encoding_error = "Configuration file encoding error: {error}"
+invalid_format = "Invalid configuration file format: {file}"
+parse_error = "Configuration file parse error: {error}"
 
-[user]
-config_error = "User configuration error"
-validation_failed = "User configuration validation failed"
-auth_success = "User authentication successful"
-auth_failed = "User authentication failed"
-list_empty = "User list is empty"
-invalid_format = "Invalid user configuration format"
-must_provide_username_password = "Each user in users must provide username and password"
-added = "User added: {username}, home directory: {home_path}"
-config_must_be_array = "Configuration item users must be an array ([[users]])"
-config_must_have_at_least_one = "Configuration file must have at least one user ([[users]])"
-config_must_be_dict = "User configuration {index} must be in dictionary format"
-config_missing_username = "User configuration {index} missing username"
-config_missing_password = "User configuration {index} missing password"
-config_duplicate_username = "Username '{username}' is duplicated"
-config_invalid_permission = "User '{username}' has invalid permission configuration: {perm}"
+[passive_ports]
+format_invalid = "Invalid passive ports format: {passive_ports}"
+range_invalid = "Invalid passive ports range: start={start}, end={end}"
 
-[network]
-listening_on = "Listening on {host}:{port}"
-shared_directory = "Shared directory: {shared_dir}"
-config_file = "Configuration file: {config_file}"
-account_list = "Account list:"
-server_ip = "Server IP"
-passive_ports = "Passive port range: {start}-{end}"
-banner_message = "Banner message: {banner}"
-max_connections = "Maximum connections: {max_cons}"
-max_connections_per_ip = "Maximum connections per IP: {max_cons_per_ip}"
-
-[error]
-port_invalid = "Invalid port: {port}"
-listen_address_invalid = "Invalid listen address: {address}"
-max_cons_invalid = "Invalid max connections: {max_cons}"
-max_cons_per_ip_invalid = "Invalid max connections per IP: {max_cons_per_ip}"
-passive_ports_invalid = "Invalid passive ports: {passive_ports}"
-passive_ports_format_invalid = "Invalid passive ports format: {passive_ports}"
-passive_ports_range_invalid = "Invalid passive ports range: {start}-{end}"
-file_operation_failed = "File operation failed: {error}"
-permission_denied = "Permission denied: {path}"
-network_error = "Network error: {error}"
-user_must_provide_username_password = "Username and password must be provided"
-user_added = "User added: {username} -> {home_path}"
+[user_config]
+duplicate_username = "Duplicate username in configuration: {username}"
+field_empty = "User #{index} field '{field}' cannot be empty"
+invalid_permission = "User {username} has invalid permission: {perm}"
+missing_field = "User #{index} missing required field: {field}"
+missing_password = "User #{index} missing password"
+missing_username = "User #{index} missing username"
+must_be_dict = "User #{index} configuration must be a dictionary"
 
 [tip]
 lan_access = "Tip: You can connect from LAN using FTP client, e.g."
 keyboard_interrupt = "Received keyboard interrupt signal, exiting..."
-runtime_error = "Runtime error occurred in server"
+runtime_error = "Runtime error: {error}"
 
 [ui]
 separator = "========================================"
+
+[gui]
+# Window title
+window_title = "FTP2Python Server Manager"
+
+# Tab titles
+tab_server_control = "Server Control"
+tab_server_config = "Server Configuration"
+tab_user_management = "User Management"
+tab_log = "Log"
+
+# Server control tab
+server_status = "Server Status"
+server_info = "Server Information"
+connection_info = "Connection Information"
+server_not_running = "Server not running"
+server_running = "Server is running"
+listen_address = "Listen Address:"
+port = "Port:"
+shared_directory = "Shared Directory:"
+browse = "Browse"
+
+# Server configuration tab
+config_file = "Configuration File"
+config_file_path = "Configuration File Path:"
+reload = "Reload"
+basic_settings = "Basic Settings"
+max_connections = "Max Connections:"
+max_connections_per_ip = "Max Connections per IP:"
+welcome_message = "Welcome Message:"
+passive_port_settings = "Passive Port Settings"
+enable_passive_ports = "Enable Passive Port Range"
+start_port = "Start Port:"
+end_port = "End Port:"
+
+
+# User management tab
+user_list = "User List"
+username = "Username"
+password = "Password"
+permissions = "Permissions"
+home_directory = "Home Directory"
+add_user = "Add User"
+edit_user = "Edit User"
+delete_user = "Delete User"
+
+# Log tab
+clear_logs = "Clear Log"
+save_logs = "Save Log"
+
+# Control buttons
+start_server = "Start Server"
+stop_server = "Stop Server"
+exit = "Exit"
+
+# Error and status messages
+import_error = "Error: Unable to import GUI module"
+dependency_error = "Please ensure tkinter and other GUI dependencies are installed"
+switching_to_cli = "Switching to command line mode..."
+startup_failed = "GUI startup failed: {error}"
+
+# User dialog
+user_permissions_hint = "(e:enter l:list r:read a:append d:delete f:rename m:mkdir w:write)"
+home_directory_hint = "(Leave empty to use shared directory)"
+ok = "OK"
+cancel = "Cancel"
+
+# Messages and prompts
+warning = "Warning"
+confirm = "Confirm"
+error = "Error"
+success = "Success"
+select_user_to_edit = "Please select a user to edit first"
+select_user_to_delete = "Please select a user to delete first"
+confirm_delete_user = "Are you sure you want to delete the selected user?"
+server_already_running = "Server is already running"
+server_is_running_exit = "Server is running, are you sure you want to exit?"
+log_saved_success = "Log saved successfully"
+log_save_failed = "Failed to save log: {error}"
+username_cannot_be_empty = "Username cannot be empty"
+password_cannot_be_empty = "Password cannot be empty"
+invalid_permission_string = "Invalid permission string, only allowed: e l r a d f m w"
+start_gui_failed = "Failed to start GUI"
+
+ftp_server_stopped = "FTP server stopped"
+start_server_failed = "Failed to start server"
+stop_server_failed = "Failed to stop server"
+user_added = "User added: {username}"
+user_deleted = "User deleted: {username}"
+user_updated = "User updated: {username}"
+# Connection information
+connection_info_title = "FTP Server Connection Information:"
+connection_methods = "Client Connection Methods:"
+ftp_client_method = "1. Use FTP client software (such as FileZilla)"
+ftp_client_host = "   - Host: {host}"
+ftp_client_port = "   - Port: {port}"
+ftp_client_credentials = "   - Username and password: See User Management tab"
+command_line_method = "2. Command line connection:"
+command_line_example = "   ftp {host} {port}"
+browser_method = "3. Browser access (download only):"
+browser_example = "   ftp://username:password@{host}:{port}/"
+
+[i18n]
+locale_load_failed = "Warning: Failed to load locale file {locale_file}: {error}"
+locale_not_found = "Warning: Locale file {locale_file} not found"

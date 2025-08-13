@@ -1,2 +1,30 @@
+# FTP2Python 项目依赖文件
+# 此文件定义了项目运行所需的所有第三方Python包
+
+# 核心FTP服务器库
+# pyftpdlib 是一个高性能的Python FTP服务器库
 pyftpdlib>=1.5.7
+
+# TOML配置文件解析库
+# Python 3.11+ 内置了tomllib，但对于旧版本需要tomli
+# 条件依赖：仅在Python版本低于3.11时安装
 tomli>=1.2.0; python_version<"3.11"
+
+# TOML文件写入库
+# 用于保存配置文件，因为tomllib只支持读取
+tomli_w>=1.0.0
+
+# 网络接口检测库（可选依赖）
+# 用于自动检测本机IP地址，提升用户体验
+# 如果安装失败不会影响核心功能
+netifaces>=0.11.0; platform_system!="Windows" or python_version>="3.8"
+
+# 注意：以下库为Python内置库，无需安装
+# - tkinter: GUI界面库（Python内置）
+# - pathlib: 路径处理库（Python 3.4+内置）
+# - threading: 多线程库（Python内置）
+# - socket: 网络套接字库（Python内置）
+# - logging: 日志库（Python内置）
+# - argparse: 命令行参数解析库（Python内置）
+# - queue: 队列库（Python内置）
+# - subprocess: 子进程库（Python内置）

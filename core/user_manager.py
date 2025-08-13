@@ -31,6 +31,7 @@ def build_authorizer(config: Dict[str, Any], shared_dir: Path) -> DummyAuthorize
     # 未指定 home -> 使用 shared_dir
     """
     authorizer = DummyAuthorizer()
+    # 每次调用时重新获取logger，确保使用最新的国际化设置
     logger = get_i18n_logger(__name__)
 
     users = config.get("users") or []
@@ -41,7 +42,7 @@ def build_authorizer(config: Dict[str, Any], shared_dir: Path) -> DummyAuthorize
         username = str(u.get("username", "")).strip()
         password = str(u.get("password", "")).strip()
         if not username or not password:
-            raise ValueError(_("user_must_provide_username_password"))
+            raise ValueError(_("user.must_provide_username_password"))
 
         perm = str(u.get("perm", "elradfmw"))
         home = u.get("home", None)
@@ -56,7 +57,7 @@ def build_authorizer(config: Dict[str, Any], shared_dir: Path) -> DummyAuthorize
             home_path = shared_dir
 
         authorizer.add_user(username, password, str(home_path), perm=perm)
-        logger.info("user_added", username=username, home_path=str(home_path))
+        logger.info("user.added", username=username, home_path=str(home_path))
 
     return authorizer
 
@@ -72,30 +73,30 @@ def validate_user_config(users: List[Dict[str, Any]]) -> None:
         ValueError: 当配置无效时
     """
     if not isinstance(users, list):
-        raise ValueError(_("user_config_must_be_array"))
+        raise ValueError(_("user.config_must_be_array"))
 
     if len(users) == 0:
-        raise ValueError(_("user_config_must_have_at_least_one"))
+        raise ValueError(_("user.config_must_have_at_least_one"))
 
     usernames = set()
     for i, user in enumerate(users):
         if not isinstance(user, dict):
-            raise ValueError(_("user_config_must_be_dict", index=i+1))
+            raise ValueError(_("user_config.must_be_dict", index=i+1))
             
         username = str(user.get("username", "")).strip()
         password = str(user.get("password", "")).strip()
         
         if not username:
-            raise ValueError(_("user_config_missing_username", index=i+1))
+            raise ValueError(_("user_config.missing_username", index=i+1))
         if not password:
-            raise ValueError(_("user_config_missing_password", index=i+1))
+            raise ValueError(_("user_config.missing_password", index=i+1))
             
         if username in usernames:
-            raise ValueError(_("user_config_duplicate_username", username=username))
+            raise ValueError(_("user_config.duplicate_username", username=username))
         usernames.add(username)
         
         # 验证权限字符串
         perm = str(user.get("perm", "elradfmw"))
         valid_perms = set("elradfmw")
         if not all(p in valid_perms for p in perm):
-            raise ValueError(_("user_config_invalid_permission", username=username, perm=perm))
+            raise ValueError(_("user_config.invalid_permission", username=username, perm=perm))

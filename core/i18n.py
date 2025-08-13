@@ -6,6 +6,7 @@
 """
 
 import os
+import logging
 from pathlib import Path
 from typing import Dict, Any
 
@@ -56,13 +57,13 @@ class I18n:
                 try:
                     with open(locale_file, 'rb') as f:
                         locale_data = tomllib.load(f)
-                    messages[lang] = self._flatten_dict(locale_data)
+                    messages[lang] = self._flatten_dict(locale_data, sep='.')
                 except Exception as e:
                     # 如果加载失败，使用空字典
-                    print(f"Warning: Failed to load locale file {locale_file}: {e}")
+                    logging.warning(f"Warning: Failed to load locale file {locale_file}: {e}")
                     messages[lang] = {}
             else:
-                print(f"Warning: Locale file {locale_file} not found")
+                logging.warning(f"Warning: Locale file {locale_file} not found")
                 messages[lang] = {}
         
         return messages
@@ -122,6 +123,79 @@ class I18n:
 
 # 全局国际化实例
 _i18n_instance = None
+
+
+def _detect_system_language() -> str:
+    """
+    检测系统语言环境
+    
+    Returns:
+        检测到的语言代码
+    """
+    import locale
+    
+    try:
+        # 尝试获取系统默认语言
+        system_locale = locale.getdefaultlocale()[0]
+        if system_locale:
+            if system_locale.startswith('zh'):
+                return 'zh_CN'
+            elif system_locale.startswith('en'):
+                return 'en_US'
+    except:
+        pass
+    
+    # 备用方案：检查环境变量
+    for env_var in ['LANG', 'LANGUAGE', 'LC_ALL', 'LC_MESSAGES']:
+        system_lang = os.environ.get(env_var, '').lower()
+        if system_lang:
+            if 'zh' in system_lang or 'cn' in system_lang:
+                return 'zh_CN'
+            elif 'en' in system_lang:
+                return 'en_US'
+    
+    # Windows特定检测
+    try:
+        import ctypes
+        windll = ctypes.windll.kernel32
+        language_id = windll.GetUserDefaultUILanguage()
+        # 中文语言ID范围
+        if language_id in [0x0804, 0x0404, 0x0c04, 0x1004, 0x1404]:
+            return 'zh_CN'
+        # 英文语言ID
+        elif language_id in [0x0409, 0x0809, 0x0c09, 0x1009, 0x1409, 0x1809, 0x1c09, 0x2009, 0x2409, 0x2809, 0x2c09, 0x3009, 0x3409]:
+            return 'en_US'
+    except:
+        pass
+    
+    # 默认返回中文
+    return 'zh_CN'
+
+
+def init_i18n_from_config(config_data: Dict[str, Any] = None) -> None:
+    """
+    从配置数据初始化国际化设置
+    
+    Args:
+        config_data: 配置数据字典，包含language字段
+    """
+    global _i18n_instance
+    
+    if config_data and 'language' in config_data:
+        language = config_data['language']
+        # 如果配置为auto，则自动检测系统语言
+        if language.lower() == 'auto':
+            language = _detect_system_language()
+    else:
+        # 自动检测系统语言
+        language = _detect_system_language()
+    
+    # 标准化语言代码
+    temp_i18n = I18n()
+    normalized_lang = temp_i18n._normalize_language(language)
+    
+    if _i18n_instance is None or _i18n_instance.language != normalized_lang:
+        _i18n_instance = I18n(normalized_lang)
 
 
 def get_i18n(language: str = None) -> I18n:
