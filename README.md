@@ -143,14 +143,17 @@ python __init__.py
 
 ### 打包为可执行文件
 
-项目提供了两个 PyInstaller 配置文件：
+项目提供了三个 PyInstaller 配置文件：
 
 ```bash
 # 标准打包（启用 UPX 压缩）
-pyinstaller ftp2python.spec
+pyinstaller .\ftp2python.spec
 
 # 禁用 UPX 压缩的打包（兼容性更好）
-pyinstaller ftp2python-disable-upx.spec
+pyinstaller .\ftp2python-disable-upx.spec
+
+# 启用终端的打包（调试用）
+pyinstaller .\ftp2python-debug.spec
 ```
 
 打包后的可执行文件位于 `dist/` 目录中。
