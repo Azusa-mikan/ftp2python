@@ -32,7 +32,7 @@
 
 1. **克隆项目**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Azusa-mikan/ftp2python
    cd ftp2python
    ```
 
